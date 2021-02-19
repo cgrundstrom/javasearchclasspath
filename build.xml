@@ -1,0 +1,15 @@
+<project basedir="." default="all">
+
+    <target name="all" depends="javasearchclasspath.jar"/>
+    
+    <target name="javasearchclasspath.jar" description="compile and build jar">
+        <mkdir dir="build"/>
+        <javac srcdir="src" destdir="build" debug="true" nowarn="true" includeantruntime="false"/>
+        <jar basedir="build" destfile="bin/javasearchclasspath.jar" includes="org/javasearchclasspath/**">
+            <manifest>
+                <attribute name="Main-Class" value="org.javasearchclasspath.JavaSearchClassPath"/>
+            </manifest>
+        </jar>
+    </target>
+
+</project>

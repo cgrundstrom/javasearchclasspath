@@ -1,0 +1,32 @@
+# Used to add to the current classpath based on all jar and zip files found in the current directory and it's sub-directories.
+# Will also add directories named "classes".
+# Run in the current process by using "source setcp" or ". setcp"
+#
+# Example:
+#   PATH=$HOME/projects/javasearchclasspath/bin:$PATH
+#   export CLASSPATH=
+#   cd $HOME/projects
+#   . setcp
+#   javasearchclasspath org.javasearchclasspath.JavaSearchClassPath
+#
+if [ -z "$1" ]
+then
+  dir=`pwd`
+else
+  dir=$1
+fi
+
+export CLASSPATH
+if [ "$OS" = Windows_NT ]
+then
+  sep=';'
+  dir=`cygpath -m $dir`
+else
+  sep=':'
+fi
+#jars=`find $dir -name classes`
+jars=`find $dir -name '*.jar' -or -name '*.zip' -or -name classes`
+for j in $jars
+do
+  CLASSPATH="$CLASSPATH${sep}${j}"
+done

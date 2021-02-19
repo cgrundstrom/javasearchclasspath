@@ -1,0 +1,9 @@
+#!/bin/bash
+command=$(which $0)
+if [ $? -ne 0 ]
+then
+   echo "Can't determine program path"
+   exit 1
+fi
+cPath=${command%/*}
+java -DsearchClassPath="$CLASSPATH" -jar $cPath/javasearchclasspath.jar "$@"
